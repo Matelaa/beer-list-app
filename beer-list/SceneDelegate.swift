@@ -18,8 +18,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        
+        let mainController = BeerViewController()
+        let navigationController = UINavigationController(rootViewController: mainController)
+        navigationController.navigationBar.isTranslucent = false
+        navigationController.navigationBar.barTintColor = .lightBlueCustom
+        navigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController.navigationBar.tintColor = .black
+        navigationController.view.backgroundColor = .darkBlueCustom
+        
         window?.windowScene = windowScene
-        window?.rootViewController = ViewController()
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
     
