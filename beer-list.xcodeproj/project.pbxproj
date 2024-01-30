@@ -12,6 +12,7 @@
 		F2FAED322B69578C00A5B345 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FAED312B69578C00A5B345 /* ViewController.swift */; };
 		F2FAED372B6957AD00A5B345 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2FAED362B6957AD00A5B345 /* Assets.xcassets */; };
 		F2FAED3A2B6957AD00A5B345 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2FAED382B6957AD00A5B345 /* LaunchScreen.storyboard */; };
+		F2FAED422B69602900A5B345 /* UIColor+CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FAED412B69602900A5B345 /* UIColor+CustomColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		F2FAED362B6957AD00A5B345 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2FAED392B6957AD00A5B345 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F2FAED3B2B6957AD00A5B345 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2FAED412B69602900A5B345 /* UIColor+CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColor.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				F2FAED362B6957AD00A5B345 /* Assets.xcassets */,
 				F2FAED382B6957AD00A5B345 /* LaunchScreen.storyboard */,
 				F2FAED3B2B6957AD00A5B345 /* Info.plist */,
+				F2FAED412B69602900A5B345 /* UIColor+CustomColor.swift */,
 			);
 			path = "beer-list";
 			sourceTree = "<group>";
@@ -134,6 +137,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2FAED422B69602900A5B345 /* UIColor+CustomColor.swift in Sources */,
 				F2FAED322B69578C00A5B345 /* ViewController.swift in Sources */,
 				F2FAED2E2B69578C00A5B345 /* AppDelegate.swift in Sources */,
 				F2FAED302B69578C00A5B345 /* SceneDelegate.swift in Sources */,
