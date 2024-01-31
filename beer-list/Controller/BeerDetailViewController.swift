@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class BeerDetailViewController: UIViewController {
     
@@ -48,6 +49,14 @@ class BeerDetailViewController: UIViewController {
         return label
     }()
     
+    lazy var favoriteIconImageView: UIImageView = {
+        let image = UIImage(named: "FavoriteIcon")
+        let imageView = UIImageView(image: image)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
     var beer: Beer!
     
     override func viewDidLoad() {
@@ -74,6 +83,7 @@ class BeerDetailViewController: UIViewController {
         self.view.addSubview(self.beerNameLabel)
         self.view.addSubview(self.beerTaglineLabel)
         self.view.addSubview(self.beerDescriptionLabel)
+        self.view.addSubview(self.favoriteIconImageView)
         
         self.setupConstraints()
     }
@@ -83,6 +93,7 @@ class BeerDetailViewController: UIViewController {
         self.setupBeerNameLabelConstraints()
         self.setupBeerTaglineLabelConstraints()
         self.setupBeerDescriptionLabelConstraints()
+        self.setupFavoriteIconImageViewConstraints()
     }
     
     private func setupBeerImageViewConstraints() {
@@ -109,7 +120,7 @@ class BeerDetailViewController: UIViewController {
         NSLayoutConstraint.activate([
             self.beerTaglineLabel.topAnchor.constraint(equalTo: self.beerNameLabel.bottomAnchor, constant: 12),
             self.beerTaglineLabel.leftAnchor.constraint(equalTo: self.beerImageView.rightAnchor, constant: 12),
-            self.beerTaglineLabel.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -24)
+            self.beerTaglineLabel.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -12)
         ])
     }
     
@@ -120,5 +131,15 @@ class BeerDetailViewController: UIViewController {
             self.beerDescriptionLabel.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -24),
 //            self.beerDescriptionLabel.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 24)
         ])
+    }
+    
+    private func setupFavoriteIconImageViewConstraints() {
+        NSLayoutConstraint.activate([
+            self.favoriteIconImageView.heightAnchor.constraint(equalToConstant: 40),
+            self.favoriteIconImageView.widthAnchor.constraint(equalToConstant: 40),
+            self.favoriteIconImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.favoriteIconImageView.topAnchor.constraint(equalTo: self.beerDescriptionLabel.bottomAnchor, constant: 24)
+        ])
+        self.favoriteIconImageView.tintColor = .systemYellow
     }
 }
