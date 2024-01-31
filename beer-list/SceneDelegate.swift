@@ -24,8 +24,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         navigationController.navigationBar.isTranslucent = false
         navigationController.navigationBar.barTintColor = .lightBlueCustom
         navigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navigationController.navigationBar.tintColor = .black
-        navigationController.view.backgroundColor = .darkBlueCustom
+        navigationController.navigationBar.tintColor = .white
+        navigationController.view.backgroundColor = .lightBlueCustom
         
         window?.windowScene = windowScene
         window?.rootViewController = navigationController

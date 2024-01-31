@@ -43,6 +43,16 @@ class BeerViewController: UIViewController {
         self.viewModel.teste()
     }
     
+    private func createSearchButton() {
+        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
+        self.navigationItem.rightBarButtonItem = searchButton
+    }
+    
+    @objc private func searchButtonTapped() {
+        self.searchController.isActive = true
+        self.searchController.searchBar.searchTextField.becomeFirstResponder()
+    }
+    
     private func setupLoadingScreen() {
         self.view.addSubview(self.activityIndicator)
         self.setupActivityIndicatorConstraints()
@@ -69,17 +79,19 @@ class BeerViewController: UIViewController {
     }
     
     private func setupSearchController() {
-        searchController.searchBar.delegate = self
-        searchController.searchBar.searchTextField.delegate = self
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
+        self.createSearchButton()
         
-        searchController.searchBar.barStyle = .default
-        searchController.searchBar.searchTextField.leftView?.tintColor = .black
-        searchController.searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search users", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
+        self.searchController.searchBar.delegate = self
+        self.searchController.searchBar.searchTextField.delegate = self
+        self.searchController.searchResultsUpdater = self
+        self.searchController.obscuresBackgroundDuringPresentation = false
         
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
+        self.searchController.searchBar.barStyle = .default
+        self.searchController.searchBar.searchTextField.leftView?.tintColor = .white
+        self.searchController.searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search users", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        
+        self.navigationItem.searchController = searchController
+        self.definesPresentationContext = true
     }
     
     private func setupTableView() {
