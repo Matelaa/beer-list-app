@@ -29,7 +29,8 @@ class BeerTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         
         label.textColor = .darkGrayCustom
-        label.numberOfLines = 0
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.6
         
         return label
     }()
@@ -39,7 +40,8 @@ class BeerTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         
         label.textColor = .lightGrayCustom
-        label.numberOfLines = 0
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.7
         
         return label
     }()
@@ -72,7 +74,8 @@ class BeerTableViewCell: UITableViewCell {
         if let imageURLString = self.beer.image, let imageURL = URL(string: imageURLString) {
             self.beerImageView.kf.setImage(with: imageURL)
         } else {
-            self.beerImageView.image = nil
+            let beerPlaceholder = UIImage(named: "BeerPlaceholder")
+            self.beerImageView.image = beerPlaceholder
         }
         self.beerNameLabel.text = self.beer.name
         self.beerTaglineLabel.text = self.beer.tagline
@@ -91,9 +94,9 @@ class BeerTableViewCell: UITableViewCell {
         self.addSubview(self.containerView)
         
         self.containerView.addSubview(self.beerImageView)
+        self.containerView.addSubview(self.arrowIconImageView)
         self.containerView.addSubview(self.beerNameLabel)
         self.containerView.addSubview(self.beerTaglineLabel)
-        self.containerView.addSubview(self.arrowIconImageView)
         
         self.setupConstraints()
     }
@@ -134,7 +137,7 @@ class BeerTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             self.beerNameLabel.topAnchor.constraint(equalTo: self.beerImageView.topAnchor, constant: 6),
             self.beerNameLabel.leftAnchor.constraint(equalTo: self.beerImageView.rightAnchor, constant: 12),
-            self.beerNameLabel.rightAnchor.constraint(equalTo: self.containerView.rightAnchor)
+            self.beerNameLabel.rightAnchor.constraint(equalTo: self.arrowIconImageView.leftAnchor, constant: -24)
         ])
     }
     
@@ -142,7 +145,7 @@ class BeerTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             self.beerTaglineLabel.topAnchor.constraint(equalTo: self.beerNameLabel.bottomAnchor, constant: 6),
             self.beerTaglineLabel.leftAnchor.constraint(equalTo: self.beerImageView.rightAnchor, constant: 12),
-            self.beerTaglineLabel.rightAnchor.constraint(equalTo: self.containerView.rightAnchor)
+            self.beerTaglineLabel.rightAnchor.constraint(equalTo: self.arrowIconImageView.leftAnchor, constant: -24)
         ])
     }
     

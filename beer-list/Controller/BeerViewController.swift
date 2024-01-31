@@ -171,7 +171,13 @@ extension BeerViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.item)
+        let beerDetailViewController = BeerDetailViewController()
+        if self.viewModel.isFiltering {
+            beerDetailViewController.beer = self.viewModel.filteredBeers[indexPath.item]
+        } else {
+            beerDetailViewController.beer = self.viewModel.beers[indexPath.item]
+        }
+        self.navigationController?.pushViewController(beerDetailViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -182,7 +188,6 @@ extension BeerViewController: UITableViewDelegate, UITableViewDataSource {
             }
         } else {
             if indexPath.row == lastRowIndex && self.viewModel.beers.count % 20 == 0 {
-                print("final da lista")
                 self.viewModel.teste()
             }
         }
