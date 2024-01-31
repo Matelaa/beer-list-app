@@ -44,6 +44,15 @@ class BeerTableViewCell: UITableViewCell {
         return label
     }()
     
+    lazy var arrowIconImageView: UIImageView = {
+        let image = UIImage(named: "ArrowIcon")
+        let imageView = UIImageView(image: image)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = .lightGrayCustom
+        return imageView
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
@@ -60,8 +69,11 @@ class BeerTableViewCell: UITableViewCell {
     func bind(beer: Beer) {
         self.beer = beer
         //setup kingfisher to image of beer, pass this to VIEWMODEL
-        let imageURL = URL(string: self.beer.image)
-        self.beerImageView.kf.setImage(with: imageURL)
+        if let imageURLString = self.beer.image, let imageURL = URL(string: imageURLString) {
+            self.beerImageView.kf.setImage(with: imageURL)
+        } else {
+            self.beerImageView.image = nil
+        }
         self.beerNameLabel.text = self.beer.name
         self.beerTaglineLabel.text = self.beer.tagline
     }
@@ -81,6 +93,7 @@ class BeerTableViewCell: UITableViewCell {
         self.containerView.addSubview(self.beerImageView)
         self.containerView.addSubview(self.beerNameLabel)
         self.containerView.addSubview(self.beerTaglineLabel)
+        self.containerView.addSubview(self.arrowIconImageView)
         
         self.setupConstraints()
     }
@@ -90,6 +103,7 @@ class BeerTableViewCell: UITableViewCell {
         self.setupBeerImageViewConstraints()
         self.setupBeerNameLabelConstraints()
         self.setupBeerTaglineLabelConstraints()
+        self.setupArrowIconImageViewConstraints()
     }
     
     private func setupContainerViewConstraints() {
@@ -129,6 +143,15 @@ class BeerTableViewCell: UITableViewCell {
             self.beerTaglineLabel.topAnchor.constraint(equalTo: self.beerNameLabel.bottomAnchor, constant: 6),
             self.beerTaglineLabel.leftAnchor.constraint(equalTo: self.beerImageView.rightAnchor, constant: 12),
             self.beerTaglineLabel.rightAnchor.constraint(equalTo: self.containerView.rightAnchor)
+        ])
+    }
+    
+    private func setupArrowIconImageViewConstraints() {
+        NSLayoutConstraint.activate([
+            self.arrowIconImageView.heightAnchor.constraint(equalToConstant: 16),
+            self.arrowIconImageView.widthAnchor.constraint(equalToConstant: 16),
+            self.arrowIconImageView.centerYAnchor.constraint(equalTo: self.containerView.centerYAnchor),
+            self.arrowIconImageView.rightAnchor.constraint(equalTo: self.containerView.rightAnchor, constant: -8)
         ])
     }
 }

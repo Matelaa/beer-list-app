@@ -12,7 +12,7 @@ struct Beer: Codable {
     let name: String
     let tagline: String
     let description: String
-    let image: String
+    let image: String?
     var isFavorite: Bool
     
     init(from decoder: Decoder) throws {
@@ -21,7 +21,7 @@ struct Beer: Codable {
         self.name = try container.decode(String.self, forKey: .name)
         self.tagline = try container.decode(String.self, forKey: .tagline)
         self.description = try container.decode(String.self, forKey: .description)
-        self.image = try container.decode(String.self, forKey: CodingKeys.image)
+        self.image = try container.decodeIfPresent(String.self, forKey: CodingKeys.image)
         self.isFavorite = false
     }
     
