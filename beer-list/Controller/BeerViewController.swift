@@ -25,6 +25,14 @@ class BeerViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
+
+    lazy var noResultsSearchView: NoResultSearchView = {
+        let view = NoResultSearchView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isHidden = true
+        
+        return view
+    }()
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -43,6 +51,13 @@ class BeerViewController: UIViewController {
         self.viewModel.teste()
     }
     
+    private func updateNoResultsImageView() {
+        let hasResults = self.viewModel.isFiltering ? !self.viewModel.filteredBeers.isEmpty : !self.viewModel.beers.isEmpty
+        DispatchQueue.main.async {
+            self.noResultsSearchView.isHidden = hasResults
+        }
+    }
+    
     private func createSearchButton() {
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
         self.navigationItem.rightBarButtonItem = searchButton
@@ -57,12 +72,12 @@ class BeerViewController: UIViewController {
         let favoritesButton = UIBarButtonItem(title: "Favorites", style: .plain, target: self, action: #selector(favoritesButtonTapped))
         self.navigationItem.leftBarButtonItem = favoritesButton
     }
-
+    
     @objc private func favoritesButtonTapped() {
         let favoritesViewController = BeerFavoriteViewController()
         self.navigationController?.pushViewController(favoritesViewController, animated: true)
     }
-
+    
     
     private func setupLoadingScreen() {
         self.view.addSubview(self.activityIndicator)
@@ -79,6 +94,7 @@ class BeerViewController: UIViewController {
         self.title = "Beer List"
         
         self.view.addSubview(self.tableView)
+        self.view.addSubview(self.noResultsSearchView)
         
         self.view.backgroundColor = UIColor.darkBlueCustom
         self.tableView.backgroundColor = .white
@@ -120,6 +136,7 @@ class BeerViewController: UIViewController {
     }
     
     private func setupConstraints() {
+        self.setupNoResultsImageViewConstraints()
         self.setupTableViewConstraints()
     }
     
@@ -129,6 +146,13 @@ class BeerViewController: UIViewController {
             self.activityIndicator.leftAnchor.constraint(equalTo: self.view.leftAnchor),
             self.activityIndicator.rightAnchor.constraint(equalTo: self.view.rightAnchor),
             self.activityIndicator.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+        ])
+    }
+    
+    private func setupNoResultsImageViewConstraints() {
+        NSLayoutConstraint.activate([
+            self.noResultsSearchView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.noResultsSearchView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
         ])
     }
     
@@ -149,7 +173,8 @@ class BeerViewController: UIViewController {
 extension BeerViewController: UITextFieldDelegate {
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         self.viewModel.resetSearch()
-        self.tableView.reloadData()
+        self.updateNoResultsImageView()
+        self.reloadTableView()
         return true
     }
 }
@@ -157,6 +182,7 @@ extension BeerViewController: UITextFieldDelegate {
 extension BeerViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         self.viewModel.resetSearch()
+        self.updateNoResultsImageView()
         self.reloadTableView()
     }
 }
@@ -221,7 +247,7 @@ extension BeerViewController: UITableViewDelegate, UITableViewDataSource {
 extension BeerViewController: BeerViewModelDelegate {
     func hasBeerFiltered(hasBeer: Bool) {
         if !hasBeer {
-            print("tem n sinho")
+            self.updateNoResultsImageView()
         }
     }
     
@@ -231,6 +257,7 @@ extension BeerViewController: BeerViewModelDelegate {
         } else {
             self.removeLoadingScreen()
             self.reloadTableView()
+            self.updateNoResultsImageView()
         }
     }
 }
