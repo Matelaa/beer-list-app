@@ -116,7 +116,7 @@ class BeerViewController: UIViewController {
         
         self.searchController.searchBar.barStyle = .default
         self.searchController.searchBar.searchTextField.leftView?.tintColor = .white
-        self.searchController.searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search users", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        self.searchController.searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search beers", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         
         self.navigationItem.searchController = searchController
         self.definesPresentationContext = true
