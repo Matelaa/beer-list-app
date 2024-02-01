@@ -54,6 +54,10 @@ class BeerDetailViewController: UIViewController {
         let imageView = UIImageView(image: image)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
+        imageView.isUserInteractionEnabled = true
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnFavoriteIcon))
+        imageView.addGestureRecognizer(tapGesture)
         return imageView
     }()
     
@@ -86,6 +90,16 @@ class BeerDetailViewController: UIViewController {
         self.view.addSubview(self.favoriteIconImageView)
         
         self.setupConstraints()
+        
+        self.checkBeerIsFavorited()
+    }
+    
+    private func checkBeerIsFavorited() {
+        if let savedFavorite = UserDefaults.standard.value(forKey: "favorite_\(self.beer.id)") as? Bool {
+            self.beer.isFavorite = savedFavorite
+            
+            self.favoriteIconImageView.tintColor = self.beer.isFavorite ? .systemYellow : .black
+        }
     }
     
     private func setupConstraints() {
@@ -128,8 +142,7 @@ class BeerDetailViewController: UIViewController {
         NSLayoutConstraint.activate([
             self.beerDescriptionLabel.topAnchor.constraint(equalTo: self.beerTaglineLabel.bottomAnchor, constant: 60),
             self.beerDescriptionLabel.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 24),
-            self.beerDescriptionLabel.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -24),
-//            self.beerDescriptionLabel.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 24)
+            self.beerDescriptionLabel.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -24)
         ])
     }
     
@@ -140,6 +153,20 @@ class BeerDetailViewController: UIViewController {
             self.favoriteIconImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             self.favoriteIconImageView.topAnchor.constraint(equalTo: self.beerDescriptionLabel.bottomAnchor, constant: 24)
         ])
-        self.favoriteIconImageView.tintColor = .systemYellow
+        self.favoriteIconImageView.tintColor = self.beer.isFavorite ? .systemYellow : .black
+    }
+    
+    @objc private func tapOnFavoriteIcon() {
+        self.beer.isFavorite.toggle()
+        
+        self.favoriteIconImageView.tintColor = self.beer.isFavorite ? .systemYellow : .black
+        
+        let favorites = UserDefaults.standard
+        
+        if self.beer.isFavorite {
+            favorites.set(true, forKey: "favorite_\(beer.id)")
+        } else {
+            favorites.removeObject(forKey: "favorite_\(beer.id)")
+        }
     }
 }

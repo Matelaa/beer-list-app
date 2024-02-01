@@ -53,6 +53,17 @@ class BeerViewController: UIViewController {
         self.searchController.searchBar.searchTextField.becomeFirstResponder()
     }
     
+    private func createFavoritesButton() {
+        let favoritesButton = UIBarButtonItem(title: "Favorites", style: .plain, target: self, action: #selector(favoritesButtonTapped))
+        self.navigationItem.leftBarButtonItem = favoritesButton
+    }
+
+    @objc private func favoritesButtonTapped() {
+        let favoritesViewController = BeerFavoriteViewController()
+        self.navigationController?.pushViewController(favoritesViewController, animated: true)
+    }
+
+    
     private func setupLoadingScreen() {
         self.view.addSubview(self.activityIndicator)
         self.setupActivityIndicatorConstraints()
@@ -75,6 +86,7 @@ class BeerViewController: UIViewController {
         self.setupConstraints()
         
         self.setupSearchController()
+        self.createFavoritesButton()
         self.setupTableView()
     }
     

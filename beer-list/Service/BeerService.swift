@@ -46,4 +46,50 @@ class BeerService {
             task.resume()
         }
     }
+    
+    func getDetailBeerByID(id: Int, completion: @escaping ([Beer]?) -> Void) {
+        let baseURL: String = "https://api.punkapi.com/v2/beers/\(id)"
+        guard let url = URL(string: baseURL) else {
+            print("URL inválida")
+            completion(nil)
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("Erro na solicitação: \(error)")
+                completion(nil)
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("Resposta inválida")
+                completion(nil)
+                return
+            }
+            
+            guard httpResponse.statusCode == 200 else {
+                print("Código de status inválido: \(httpResponse.statusCode)")
+                completion(nil)
+                return
+            }
+            
+            guard let data = data else {
+                print("Dados vazios")
+                completion(nil)
+                return
+            }
+            
+            do {
+                let beers = try JSONDecoder().decode([Beer].self, from: data)
+                completion(beers)
+            } catch {
+                print("Erro na decodificação JSON: \(error)")
+                completion(nil)
+            }
+        }
+        task.resume()
+    }
+
+
 }
