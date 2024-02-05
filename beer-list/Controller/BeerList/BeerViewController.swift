@@ -48,7 +48,7 @@ class BeerViewController: UIViewController {
         self.viewModel.delegate = self
         
         self.setupUI()
-        self.viewModel.teste()
+        self.viewModel.getBeers()
     }
     
     private func updateNoResultsImageView() {
@@ -238,7 +238,7 @@ extension BeerViewController: UITableViewDelegate, UITableViewDataSource {
             }
         } else {
             if indexPath.row == lastRowIndex && self.viewModel.beers.count % 20 == 0 {
-                self.viewModel.teste()
+                self.viewModel.getBeers()
             }
         }
     }

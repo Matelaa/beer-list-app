@@ -23,7 +23,7 @@ class BeerViewModel {
     var page: Int = 1
     var noBeerFound: Bool = false
     
-    func teste() {
+    func getBeers() {
         self.isLoading = true
         self.delegate?.finishedGetBeers()
         self.service.getBeers(page: self.page) { [weak self] beers in
