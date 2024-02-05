@@ -75,6 +75,39 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		F229F3892B71A6C100C794A4 /* BeerList */ = {
+			isa = PBXGroup;
+			children = (
+				F2FAED312B69578C00A5B345 /* BeerViewController.swift */,
+				F2FAED4D2B696ACD00A5B345 /* Cell */,
+			);
+			path = BeerList;
+			sourceTree = "<group>";
+		};
+		F229F38A2B71A6D700C794A4 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				F2DD74F22B6C2B55004FA574 /* NoResultSearchView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		F229F38B2B71A6E800C794A4 /* BeerDetail */ = {
+			isa = PBXGroup;
+			children = (
+				F211638E2B6AB0DA00C9D42C /* BeerDetailViewController.swift */,
+			);
+			path = BeerDetail;
+			sourceTree = "<group>";
+		};
+		F229F38C2B71A70B00C794A4 /* BeerFavorite */ = {
+			isa = PBXGroup;
+			children = (
+				F2B8D6372B6AE88200455C80 /* BeerFavoriteViewController.swift */,
+			);
+			path = BeerFavorite;
+			sourceTree = "<group>";
+		};
 		F27A424E2B6980EA00C97A62 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +144,7 @@
 		F2FAED2C2B69578C00A5B345 /* beer-list */ = {
 			isa = PBXGroup;
 			children = (
+				F229F38A2B71A6D700C794A4 /* Components */,
 				F27A424F2B6986CE00C97A62 /* Extension */,
 				F27A424E2B6980EA00C97A62 /* Fonts */,
 				F2FAED472B69649E00A5B345 /* Model */,
@@ -146,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				F2FAED4A2B69681C00A5B345 /* BeerViewModel.swift */,
+				F2DD74F02B6C0420004FA574 /* BeerFavoriteViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -153,12 +188,9 @@
 		F2FAED4C2B696AA500A5B345 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				F2FAED4D2B696ACD00A5B345 /* Cell */,
-				F2FAED312B69578C00A5B345 /* BeerViewController.swift */,
-				F211638E2B6AB0DA00C9D42C /* BeerDetailViewController.swift */,
-				F2B8D6372B6AE88200455C80 /* BeerFavoriteViewController.swift */,
-				F2DD74F02B6C0420004FA574 /* BeerFavoriteViewModel.swift */,
-				F2DD74F22B6C2B55004FA574 /* NoResultSearchView.swift */,
+				F229F3892B71A6C100C794A4 /* BeerList */,
+				F229F38B2B71A6E800C794A4 /* BeerDetail */,
+				F229F38C2B71A70B00C794A4 /* BeerFavorite */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
