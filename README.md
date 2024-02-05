@@ -17,7 +17,7 @@ Bem-vindo ao Beer List App! Este é um projeto desenvolvido em Swift utilizando 
 git clone https://github.com/Matelaa/beer-list-app
 cd beer-list-app
 pod install
-open beer-list-xcworkspace
+open beer-list.xcworkspace
 ⌘+R
 ```
 Divirta-se explorando a variedade de cervejas disponíveis! 🍻 Cheers!
